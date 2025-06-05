@@ -7,6 +7,7 @@ dotenv.config();
 import User from '../models/user-model.js';
 import  generateAccessToken  from '../utils/generateAccessToken.js';
 import  generateRefreshToken  from '../utils/genrateRefreshToken.js';
+import uploadImageCloudinary from '../utils/uploadImageCloudnary.js';
 
 
 
@@ -211,3 +212,25 @@ export async function logoutController(request, response) {
         });
     }
 }
+
+//uploading user avatar
+export async function uploadAvatarController(request, response) {
+    try {
+        const image = request.file;
+        const upload = await uploadImageCloudinary(image)
+        return response.status(200).json({
+            message: "Avatar uploaded successfully",
+            error: false,
+            success: true,
+            data: upload
+        });
+
+    } catch (error) {
+        console.error("Avatar upload error:", error);
+        return response.status(500).json({
+            message: error.message || error,
+            error: true,
+            success: false
+        });
+    }
+} 
