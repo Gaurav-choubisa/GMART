@@ -216,13 +216,17 @@ export async function logoutController(request, response) {
 //uploading user avatar
 export async function uploadAvatarController(request, response) {
     try {
+        const userId =  request.userId;
         const image = request.file;
         const upload = await uploadImageCloudinary(image)
+        const updateUser = await UserModel.findByIdAndUpdate(userId, {
+            avatar: upload.url,
+        });
         return response.status(200).json({
             message: "Avatar uploaded successfully",
             error: false,
             success: true,
-            data: upload
+            data: updateUser
         });
 
     } catch (error) {
@@ -234,3 +238,44 @@ export async function uploadAvatarController(request, response) {
         });
     }
 } 
+
+// update user details
+export async function updateUserDetailsController(request, responsee){
+    try {
+        const userId = request.userId;
+        const { name, email, password, mobile } = request.body;
+
+        let hashPassword = ""
+        if(password){
+            const salt = await bcryptjs.genSalt(10);
+            hashPassword = await bcryptjs.hash(password, salt);
+        }
+        const updateUser = await UserModel.findByIdAndUpdate(userId, {
+            ...(name && { name }),
+            ...(email && { email }),
+            ...(mobile && { mobile }),
+            ...(hashPassword && { password: hashPassword }),
+
+        });
+
+        return responsee.status(200).json({
+            message: "User details updated successfully",
+            error: false,
+            success: true,
+            data: updateUser
+        });
+        
+    } catch (error) {
+        console.error("Update user details error:", error);
+        return responsee.status(500).json({
+            message: error.message || error,
+            error: true,
+            success: false
+        });
+        
+    }
+}
+
+export async function forgotpasswordController(request, response) {
+   
+    }
