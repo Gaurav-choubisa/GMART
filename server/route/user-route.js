@@ -5,6 +5,7 @@ import { loginController } from '../controllers/user-controller.js';
 import { logoutController } from '../controllers/user-controller.js';
 import { uploadAvatarController } from '../controllers/user-controller.js';
 import { updateUserDetailsController } from '../controllers/user-controller.js';
+import { forgotpasswordController } from '../controllers/user-controller.js'
 import auth  from '../middleware/auth.js';
 import upload from '../middleware/multer.js';
 
@@ -17,5 +18,6 @@ userRouter.post('/login', loginController);
 userRouter.get('/logout',auth, logoutController);
 userRouter.put('/upload-avatar',auth, upload.single('avatar'),uploadAvatarController);
 userRouter.put('/update-details', auth, updateUserDetailsController);
+userRouter.put('/forgot-password', forgotpasswordController);
 
 export default userRouter;

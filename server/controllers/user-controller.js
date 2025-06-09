@@ -8,6 +8,8 @@ import User from '../models/user-model.js';
 import  generateAccessToken  from '../utils/generateAccessToken.js';
 import  generateRefreshToken  from '../utils/genrateRefreshToken.js';
 import uploadImageCloudinary from '../utils/uploadImageCloudnary.js';
+import genrateOtp from '../utils/genrateOtp.js'
+import forgotPasswordTemplete from '../utils/forgotPasswordTemplete.js'
 
 
 
@@ -277,5 +279,45 @@ export async function updateUserDetailsController(request, responsee){
 }
 
 export async function forgotpasswordController(request, response) {
-   
+    try {
+        const { email } = request.body;
+
+        const user  = await UserModel.findOne({ email })
+        if(!user){
+           return response.status(400).json({
+            message : "User not available",
+            error : true,
+            success : false  
+        })
+        }
+        const Otp = genrateOtp()
+        const expireTime  = new Date() + 60*60*1000
+        const update =  await UserModel.findByIdAndUpdate(user._id,{
+            forgot_password_otp : Otp,
+            forgot_password_expiry: new Date(expireTime).toISOString()
+            
+        })
+            await sendEmail(
+            email, // Make sure it's a string
+            "Forgot password form GMART",
+            forgotPasswordTemplete({
+                name: name,
+                otp: Otp
+            })
+        );
+        return response.json({
+            message : "Check your Email",
+            error : false,
+            success : true
+        })
+
+
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            success : false  
+        })
+    }
+
     }
