@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
-import { useLocation, useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
+import useMobile from "../hooks/useMobile";
 
 const Search = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isSearchPage, SetISSearchPage] = useState(false);
+  const [isMobile] = useMobile();
 
   useEffect(() => {
     const isSearch = location.pathname === "/search";
@@ -17,21 +20,29 @@ const Search = () => {
     navigate("/search");
   };
 
-  console.log("search", isSearchPage);
 
   return (
     <div className="w-full min-w-[300px] lg:min-w-[420px] h-10 lg:h-12 rounded-full border overflow-hidden flex items-center  text-neutral-400 bg-slate-50 focus-within:border-primary-200 group">
-      <button className="flex justify-center items-center h-full p-3 group-focus-within:text-primary-200">
-        <IoSearch size={22} />
-      </button>
+      <div>
+        {/*  */}
+        {
+          (isMobile && isSearchPage) ? (  <Link to={"/"} className="flex justify-center items-center h-full p-2 m-1 group-focus-within:text-primary-200 bg-white rounded-full shadow-md">
+          <FaArrowLeft size={22}/>
+        </Link>) : (
+            <button className="flex justify-center items-center h-full p-3 group-focus-within:text-primary-200">
+          <IoSearch size={22} />
+        </button>
+        )
+        }
+     
+      </div>
       <div className="w-full">
         {!isSearchPage ? (
           <div onClick={redirectToSearchPage}>
             <TypeAnimation
               sequence={[
-                // Same substring at the start will only be typed out once, initially
                 'search "milk"',
-                1000, // wait 1s before replacing "Mice" with "Hamsters"
+                1000, 
                 'search "bread"',
                 1000,
                 'search "vegetables"',
@@ -39,7 +50,7 @@ const Search = () => {
                 'search "panner"',
                 1000,
                 'search "chips"',
-                1000, // wait 1s before replacing "Mice" with "Hamsters"
+                1000,
                 'search "biscuits"',
                 1000,
                 'search "fruits"',
