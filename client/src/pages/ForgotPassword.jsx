@@ -33,7 +33,7 @@ const ForgotPassword = () => {
 
    try {
      const response = await Axios({
-        ...SummaryApi.login,
+        ...SummaryApi.ForgotPassword,
         data: data
     })
         if(response.data.error){
@@ -75,46 +75,22 @@ const ForgotPassword = () => {
               className="bg-blue-50 p-2 border border-gray-300 focus:border-primary-200 rounded outline-none"
             />
           </div>
-
-          <div className="grid gap-1 relative ">
-            <label htmlFor="password">Password :</label>
-            <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              name="password"
-              placeholder="enter the password"
-              value={data.password}
-              onChange={handleChange}
-              className="bg-blue-50 p-2 border border-gray-300 focus:border-primary-200 rounded outline-none"
-            />
-            <span
-              className="absolute right-3 top-10 cursor-pointer text-gray-600"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <IoEyeOffSharp /> : <IoEyeSharp />}
-            </span>
-          </div>
             <Link to={"/forgot-password"} className="block ml-auto hover:text-primary-200">Forgot password ?</Link>
           <button
             type="submit"
             disabled={
-              !data.email ||
-              !data.password 
+              !data.email 
             }
             className={`text-white p-2 rounded mt-2 transition 
     ${
-      !data.email || !data.password 
+      !data.email  
         ? "bg-gray-400 cursor-not-allowed"
         : "bg-green-800 hover:bg-green-700 animate-bounce"
     }`}
           >
-            Login
+            Send OTP
           </button>
         </form>
-
-        <p className="gap-3 mt-6 px-1">
-            Not have account ? <Link to={"/register"} className="font-semibold text-green-800">Register</Link>
-        </p>
       </div>
     </section>
   );
