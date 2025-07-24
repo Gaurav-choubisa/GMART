@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import Axios from "../utiles/Axios";
 import SummaryApi from "../common/SummaryApi";
 import AxiosToastError from "../utiles/AxiosToastError";
@@ -12,7 +12,7 @@ const Login = () => {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,50 +22,50 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if ( !data.email || !data.password) {
+    if (!data.email || !data.password) {
       toast.error("Please fill in all fields.");
       return;
     }
 
     console.log("Form Data:", data);
 
-
-   try {
-     const response = await Axios({
+    try {
+      const response = await Axios({
         ...SummaryApi.login,
-        data: data
-    })
-        if(response.data.error){
-        toast.error(response.data.message)
-    }
-    if(response.data.success){
-        toast.success(response.data.message)
+        data: data,
+      });
+      if (response.data.error) {
+        toast.error(response.data.message);
+      }
+      if (response.data.success) {
+        toast.success(response.data.message);
+        localStorage.setItem("accesstoken", response.data.data.accesstoken);
+        localStorage.setItem("refreshtoken", response.data.data.refreshtoken);
         setData({
-            email: "",
-            password: "",
-        })
-        navigate("/")
+          email: "",
+          password: "",
+        });
+        navigate("/");
+      }
+    } catch (error) {
+      AxiosToastError(error);
     }
-   } catch (error) {
-    AxiosToastError(error)
-   }
-
   };
-
-  
 
   return (
     <section className="w-full container mx-auto px-2">
       <div className="bg-white my-4 w-full mx-auto max-w-lg rounded p-4">
         <p>
-          Welcome to <strong className="font-semibold text-green-900 hover:text-green-700">GMART</strong>
+          Welcome to{" "}
+          <strong className="font-semibold text-green-900 hover:text-green-700">
+            GMART
+          </strong>
         </p>
 
         <form className="grid gap-4 mt-6" onSubmit={handleSubmit}>
-
           <div className="grid gap-1">
             <label htmlFor="email">Email :</label>
             <input
@@ -97,16 +97,18 @@ const Login = () => {
               {showPassword ? <IoEyeOffSharp /> : <IoEyeSharp />}
             </span>
           </div>
-            <Link to={"/forgot-password"} className="block ml-auto hover:text-primary-200">Forgot password ?</Link>
+          <Link
+            to={"/forgot-password"}
+            className="block ml-auto hover:text-primary-200"
+          >
+            Forgot password ?
+          </Link>
           <button
             type="submit"
-            disabled={
-              !data.email ||
-              !data.password 
-            }
+            disabled={!data.email || !data.password}
             className={`text-white p-2 rounded mt-2 transition 
     ${
-      !data.email || !data.password 
+      !data.email || !data.password
         ? "bg-gray-400 cursor-not-allowed"
         : "bg-green-800 hover:bg-green-700 animate-bounce"
     }`}
@@ -116,7 +118,10 @@ const Login = () => {
         </form>
 
         <p className="gap-3 mt-6 px-1">
-            Not have account ? <Link to={"/register"} className="font-semibold text-green-800">Register</Link>
+          Not have account ?{" "}
+          <Link to={"/register"} className="font-semibold text-green-800">
+            Register
+          </Link>
         </p>
       </div>
     </section>

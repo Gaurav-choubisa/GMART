@@ -11,6 +11,7 @@ const ForgotPassword = () => {
   });
 
   const navigate = useNavigate()
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,10 +42,13 @@ const ForgotPassword = () => {
     }
     if(response.data.success){
         toast.success(response.data.message)
+        navigate("/Otp-Verification-Page",{
+          state : data
+        })
         setData({
             email: "",
         })
-        navigate("/")
+        
     }
    } catch (error) {
     AxiosToastError(error)
@@ -56,9 +60,9 @@ const ForgotPassword = () => {
 
   return (
     <section className="w-full container mx-auto px-2">
-      <div className="bg-white my-4 w-full mx-auto max-w-lg rounded p-4">
-        <p>
-          Welcome to <strong className="font-semibold text-green-900 hover:text-green-700">GMART</strong>
+      <div className="bg-white my-4 w-full mx-auto max-w-lg rounded p-4 shadow-sd">
+        <p className="font-semibold text-green-800">
+          Forgot Passwword Verification for <strong className="font-semibold text-green-800 ">GMART</strong>
         </p>
 
         <form className="grid gap-4 mt-6" onSubmit={handleSubmit}>
@@ -75,7 +79,6 @@ const ForgotPassword = () => {
               className="bg-blue-50 p-2 border border-gray-300 focus:border-primary-200 rounded outline-none"
             />
           </div>
-            <Link to={"/forgot-password"} className="block ml-auto hover:text-primary-200">Forgot password ?</Link>
           <button
             type="submit"
             disabled={
@@ -91,6 +94,9 @@ const ForgotPassword = () => {
             Send OTP
           </button>
         </form>
+         <p className="gap-3 mt-6 px-1">
+                    Already have account ? <Link to={"/login"} className="font-semibold text-green-800">Login</Link>
+                </p>
       </div>
     </section>
   );
