@@ -168,6 +168,10 @@ export async function loginController(request, response) {
         response.cookie("accesstoken", accesstoken, cookieOptions);
         response.cookie("refreshtoken", refreshtoken, cookieOptions);
 
+        const updateUser = await UserModel.findByIdAndUpdate(user?._id,{
+            last_login_date : new Date()
+        })
+
         return response.status(200).json({
             message: "Login successful",
             error: false,
@@ -357,10 +361,15 @@ export async function verifyForgotPasswordController(request, response){
                 })
         }
 
+        const updateUser =  await UserModel.findByIdAndUpdate(user._id,{
+            forgot_password_otp : "",
+            forgot_password_expiry : ""
+        })
+
         return response.json({
             message : "otp verified successfully",
             error : false,
-            succes : true
+            success : true
         })
 
         
@@ -468,4 +477,26 @@ export async function refreshToken(request, response){
             success : false
         })
     }
+}
+
+// get user login details
+export async function usersDetails(request, response){
+try {
+    const userId =  request.userId
+
+    const user  = await UserModel.findById(userId).select('-password -refresh_Token')
+
+    return response.json({
+        message : "User details fetched successfully",
+        error : false,      
+        success : true,
+        data : user
+    })
+} catch (error) {
+    return response.status(500).json({
+        message : "Something went wrong",
+        error : true,
+        success : false
+    })
+}
 }

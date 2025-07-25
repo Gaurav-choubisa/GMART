@@ -28,6 +28,10 @@ const SummaryApi = {
     RefreshToken : {
         url : "/api/user/refresh-token",
         method : "post"
+    },
+    UserDetails : {
+        url : "/api/user/user-details",
+        memthod : "get"
     }
 }
 export default SummaryApi

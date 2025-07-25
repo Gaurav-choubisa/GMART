@@ -41,7 +41,10 @@ const router = createBrowserRouter([
         path : "reset-password",
         element: <ResetPassword />
       },
-      
+      // {
+      //   path : "user-details",
+      //   element : <UserDetails />
+      // }
     ],
   },
 ]);
