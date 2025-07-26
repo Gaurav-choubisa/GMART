@@ -34,7 +34,7 @@ const userSlice = createSlice({
       state.role = action.payload?.role || [];
     },
 
-    clearUserDetails: (state) => {
+    LogOut: (state, actions) => {
       state._id = "";
       state.name = "";
       state.email = "";
@@ -51,6 +51,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUserDetails, clearUserDetails } = userSlice.actions;
+export const { setUserDetails, LogOut } = userSlice.actions;
 
 export default userSlice.reducer;

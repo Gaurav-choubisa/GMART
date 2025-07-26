@@ -1,0 +1,1 @@
+nginx, pgbouncer, distributed node servers, security(ddos), business logic.

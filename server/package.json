@@ -4,7 +4,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js -p=8080",
+    "dev:8081": "node index.js -p=8081",
+    "dev:8082": "node index.js -p=8082",
+    "dev:8083": "node index.js -p=8083",
     "dev": "nodemon"
   },
   "keywords": [],

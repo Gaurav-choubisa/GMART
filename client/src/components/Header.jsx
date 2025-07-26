@@ -53,19 +53,25 @@ const Header = () => {
               <FaCircleUser size={26} />
             </button>
             {/* this part musst be visible in desktop version only */}
-            <div className="hidden lg:flex gap-10 items-center">
+            <div className="hidden lg:flex gap-10 items-center cursor-pointer">
               {user?._id ? (
                 <div className="relative">
-                  <div className="flex items-center gap-2">
+                  <div onClick= {()=>setOpenUserMenu(preve => !preve)} className="flex select-none items-center gap-1">
                     <p>Account</p>
-                    <GoTriangleDown />
-                    {/* <GoTriangleUp /> */}
+                    {openUserMenu ? (
+                      <GoTriangleUp size={25} />
+                    ) : (
+                      <GoTriangleDown size={25} />
+                    )}
                   </div>
-                  <div className="absolute right-0 top-12">
+
+                  {
+                    openUserMenu && ( <div className="absolute right-0 top-12">
                     <div className="bg-white rounded p-4 min-w-52 lg:shadow-lg">
-                      <UserMenu/>
+                      <UserMenu />
                     </div>
-                  </div>
+                  </div>) 
+}
                 </div>
               ) : (
                 <button className="text-lg px-2" onClick={redirectToLoginPage}>

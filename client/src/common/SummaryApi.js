@@ -32,6 +32,10 @@ const SummaryApi = {
     UserDetails : {
         url : "/api/user/user-details",
         memthod : "get"
+    },
+    Logout : {
+        url : "/api/user/logout",
+        method : "get"
     }
 }
 export default SummaryApi
