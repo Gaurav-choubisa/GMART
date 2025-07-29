@@ -20,6 +20,16 @@ const Header = () => {
   const redirectToLoginPage = () => {
     navigate("/login");
   };
+  const handleMobileUser = () => {
+    if (!user._id) {
+      navigate("/login")
+      return
+    }
+    navigate("/user")
+  };
+  const handleCloseOpenMenu = () => {
+    setOpenUserMenu(false);
+  };
   return (
     <header className="h-24 flex lg:h-20 lg:shadow-md sticky top-0 bg-white z-50 flex-col justify-center gap-1">
       {!(isSearchpage && isMobile) && (
@@ -49,14 +59,20 @@ const Header = () => {
           </div>
           {/* this part musst be visible in mobile version only */}
           <div className="">
-            <button className="text-neutral-600 lg:hidden">
+            <button
+              className="text-neutral-600 lg:hidden"
+              onClick={handleMobileUser}
+            >
               <FaCircleUser size={26} />
             </button>
             {/* this part musst be visible in desktop version only */}
             <div className="hidden lg:flex gap-10 items-center cursor-pointer">
               {user?._id ? (
                 <div className="relative">
-                  <div onClick= {()=>setOpenUserMenu(preve => !preve)} className="flex select-none items-center gap-1">
+                  <div
+                    onClick={() => setOpenUserMenu((preve) => !preve)}
+                    className="flex select-none items-center gap-1"
+                  >
                     <p>Account</p>
                     {openUserMenu ? (
                       <GoTriangleUp size={25} />
@@ -65,13 +81,13 @@ const Header = () => {
                     )}
                   </div>
 
-                  {
-                    openUserMenu && ( <div className="absolute right-0 top-12">
-                    <div className="bg-white rounded p-4 min-w-52 lg:shadow-lg">
-                      <UserMenu />
+                  {openUserMenu && (
+                    <div className="absolute right-0 top-12">
+                      <div className="bg-white rounded p-4 min-w-52 lg:shadow-lg">
+                        <UserMenu close={handleCloseOpenMenu} />
+                      </div>
                     </div>
-                  </div>) 
-}
+                  )}
                 </div>
               ) : (
                 <button className="text-lg px-2" onClick={redirectToLoginPage}>

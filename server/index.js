@@ -17,11 +17,6 @@ app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use("/api/user", userRouter);
 
 let PORT = 8080;
-if (process.argv[2] && process.argv[2].includes("-p")) {
-  PORT = process.argv[2].split("=")[1] || 0;
-} else {
-  console.log("Flag is not present.");
-}
 
 app.get("/", (request, response) => {
   //server to client

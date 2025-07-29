@@ -436,7 +436,7 @@ export async function resetPasswordController(request, response){
 // refresh token generator
 export async function refreshToken(request, response){
     try {
-        const refreshToken =  request.cookies.refreshtoken || request.header?.authorization?.split(" ")[1];
+        const refreshToken =  request.cookies.refreshtoken || request.headers?.authorization?.split(" ")[1];
         if(!refreshToken){
             return response.status(401).json({
                 message : "Unaurthorized Token",

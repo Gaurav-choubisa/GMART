@@ -3,13 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
-  "scripts": {
-    "start": "node index.js -p=8080",
-    "dev:8081": "node index.js -p=8081",
-    "dev:8082": "node index.js -p=8082",
-    "dev:8083": "node index.js -p=8083",
-    "dev": "nodemon"
-  },
+ "scripts": {
+  "start": "node server/index.js -p=8081",
+  "dev": "nodemon server/index.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -29,4 +26,5 @@
     "nodemon": "^3.1.10",
     "resend": "^4.5.1"
   }
+ 
 }
