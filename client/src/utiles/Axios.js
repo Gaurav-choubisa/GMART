@@ -3,7 +3,7 @@ import SummaryApi, { baseUrl } from "../common/SummaryApi";
 
 const Axios = axios.create({
   baseURL: baseUrl,
-  withCredentials: true,
+  withCredentials: true, 
 });
 
 // Attach access token to each request

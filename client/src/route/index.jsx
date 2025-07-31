@@ -10,6 +10,8 @@ import ResetPassword from "../pages/ResetPassword.jsx";
 import UserMenuMobile from "../pages/UserMenuMobile.jsx";
 import Dashboard from "../layouts/Dashboard.jsx";
 import Profile from "../pages/Profile.jsx";
+import MyOrder from "../pages/MyOrder.jsx";
+import Address from "../pages/Address.jsx";
 
 const router = createBrowserRouter([
   {
@@ -55,7 +57,16 @@ const router = createBrowserRouter([
           {
             path : "profile",
             element : <Profile />
-      }]
+      },
+      {
+            path : "myorders",
+            element : <MyOrder />
+      },
+      {
+            path : "address",
+            element : <Address />
+      },
+    ]
       },
     ],
   },

@@ -46,10 +46,10 @@ const UserMenu = ({ close }) => {
 
       <Divider />
       <div className="grid text-sm gap-2">
-        <Link to={""} className="px-2 hover:bg-orange-200 py-1 rounded">
+        <Link to={"/dashboard/myorders"} className="px-2 hover:bg-orange-200 py-1 rounded">
           My Order
         </Link>
-        <Link to={""} className="px-2 hover:bg-orange-200 py-1 rounded">
+        <Link to={"/dashboard/address"} className="px-2 hover:bg-orange-200 py-1 rounded">
           Save Address
         </Link>
         <button

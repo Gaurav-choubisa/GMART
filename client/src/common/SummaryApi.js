@@ -36,6 +36,10 @@ const SummaryApi = {
     Logout : {
         url : "/api/user/logout",
         method : "get"
+    },
+    avatar:{
+        url : "/api/user/upload-avatar",
+        method : "put"
     }
 }
 export default SummaryApi

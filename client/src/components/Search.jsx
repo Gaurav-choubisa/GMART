@@ -41,21 +41,21 @@ const Search = () => {
           <div onClick={redirectToSearchPage}>
             <TypeAnimation
               sequence={[
-                'search "milk"',
+                'search "mouse"',
                 1000, 
-                'search "bread"',
+                'search "keyboard"',
                 1000,
-                'search "vegetables"',
+                'search "cable"',
                 1000,
-                'search "panner"',
+                'search "headphone"',
                 1000,
-                'search "chips"',
+                'search "pendrive"',
                 1000,
-                'search "biscuits"',
+                'search "RAM"',
                 1000,
-                'search "fruits"',
+                'search "charger"',
                 1000,
-                'search "cheese"',
+                'search "battries"',
                 1000,
               ]}
               wrapper="span"
