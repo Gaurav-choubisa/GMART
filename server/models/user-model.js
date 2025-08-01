@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
-const userSchema = new mongoose.Schema({    
+const userSchema = new mongoose.Schema({ 
+    employee_id : {
+        type: String,
+        unique : true
+    },   
     name: {
         type: String,
         required: [true, 'Name is required'],
@@ -63,7 +67,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['ADMIN', 'USER'],
+        enum: ['ADMIN', 'USER','IT-TEAM'],
         default: 'USER',
     },
 
